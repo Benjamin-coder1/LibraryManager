@@ -1,0 +1,42 @@
+Projet ENSTA 2021
+Application de gestion d’une bibliothèque
+
+
+Les questions du projet ont été traité dans l'ordre mais parfois certain retour en arrière, notament pour l'optimisation des Servlet ont été fait.
+Ci dessous quelques annotations et difficulté rencontré lors du projet
+
+
+
+- Pour stocker le type d'abonement, il a été fait le choix d'une structure d'enumeration a 3 valeurs. Certaines methodes ont été implémentée, elles servent 
+dans la suite du tp 
+
+- J'ai créé plusieurs packages pour mettre les couches de l'application (grosso modo 1 package / couche) 
+
+- travaillant sur Eclipse j'ai eu un probleme de lancement des tests (impossible de trouver une solution meme avec le prof) J'ai donc du 
+coder mes DAO / services et j'ai verifié leur bon fonctionnement lors de la phase de conception des Servlets 
+
+- une methode update dans membres a été ajoutée impossible sinon de mettre a jour les données d'un membre sans le supprimer puis le recréer (un peu bete de faire ca ? )
+
+- l'architecture singleton a bien été mise en place tres pratique plutot que de créer 50 classes de DAO / Service
+
+- La structure des methodes de la DAO est toujours la meme, dans un bloc try/catch : 
+		- On ouvre la connection dans le try (qui la referme ensuite) 
+		- On créer une requete préparée (les chaines de caracteres sont des champs de la classes)
+		- On remplis la requete puis on l'execute  (executeUpdate / executeQuery)
+		- On formate les données a retourner 
+En cas de probleme de connexion avec la bdd on leve une erreure DAO 
+
+
+- La couche de service sert en grande partie a proteger la couche de DAO on utilise le format Singleton pour la coder 
+Certaines protections ont été implémentée mais on peux en rajouter autant que l'on veux. La structure est la suivante : 
+		- verification des données 
+		- appel a une ou plusieurs méthode DAO 
+		- retour du resulat si aucune erreur 
+Si les données entrée ne verifient pas les conditions alors on ne fait pas appel a la DAO et la base de données est intacte 
+
+
+- Dans EmpruntReturnServlet on traite egalement le cas ou l'on passe l'id par l'URL (utilisé partout)
+
+- Dans les cas ou on supprime un membres on retourne ses emprunts actuels au passage pour ne pas bloquer de livre idem dans le cas ou on supprime un livre
+
+- J'ai essayé de prendre au mieux en compte les cas de mauvaise saisie comme pour la mauvaise selection de livre a ajouter par exemple 

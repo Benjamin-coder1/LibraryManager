@@ -1,0 +1,2 @@
+127.0.0.1 - - [02/Apr/2021:23:12:23 +0200] "GET /TP3Ensta HTTP/1.1" 302 - http-bio-8080-exec-1 0
+127.0.0.1 - - [02/Apr/2021:23:12:26 +0200] "GET /TP3Ensta/dashboard HTTP/1.1" 200 6904 http-bio-8080-exec-2 1307
